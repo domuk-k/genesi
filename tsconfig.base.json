@@ -8,13 +8,15 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "importHelpers": true,
-    "target": "es2015",
+    "target": "ESNext",
     "module": "esnext",
     "lib": ["es2020", "dom"],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@genesi/jazzplayer": ["packages/jazzplayer/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }

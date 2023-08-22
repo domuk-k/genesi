@@ -1,0 +1,15 @@
+{
+  "name": "@genesi/jazzplayer",
+  "version": "0.0.1",
+  "dependencies": {
+    "@tonejs/midi": "^2.0.28",
+    "lodash": "^4.17.21",
+    "tone": "^14.7.77"
+  },
+  "main": "./index.js",
+  "module": "./index.mjs",
+  "typings": "./index.d.ts",
+  "devDependencies": {
+    "@types/lodash": "^4.14.197"
+  }
+}
