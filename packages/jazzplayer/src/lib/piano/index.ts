@@ -1,7 +1,8 @@
 import * as Tone from 'tone';
 
 export class Piano extends Tone.Sampler {
-  constructor() {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  constructor(params?: Partial<Tone.SamplerOptions>) {
     super({
       urls: {
         A0: 'A0.mp3',
@@ -37,6 +38,7 @@ export class Piano extends Tone.Sampler {
       },
       release: 10,
       baseUrl: 'https://tonejs.github.io/audio/salamander/',
+      ...params,
     });
     this.toDestination();
   }
