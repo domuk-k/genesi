@@ -1,30 +1,40 @@
 import * as Tone from 'tone';
-import { Midi, Track } from '@tonejs/midi';
+import { Midi } from '@tonejs/midi';
+import * as _ from 'lodash';
+import { Piano } from './piano';
 
-const midiFilePath = './assets/in-the-hall.mid';
+const midiFilePath = './assets/peacepiece.mid';
 
 const midi = await Midi.fromUrl(midiFilePath);
-const now = Tone.now() + 0.5;
-const synth = new Tone.Synth({
-  envelope: {
-    attack: 0.02,
-    decay: 0.1,
-    sustain: 0.3,
-    release: 1,
-  },
-}).toDestination();
+const notes = midi.tracks[0].notes;
 
-document.addEventListener('click', () => {
-  midi.tracks.forEach((track: Track) => {
-    track.notes.forEach((note) => {
-      synth.triggerAttackRelease(
-        note.name,
-        note.duration,
-        note.time + now,
-        note.velocity
-      );
-    });
-  });
+// const pianos = midi.tracks.map(() => new Piano());
+const piano = new Piano();
+// console.log('piano set up', pianos);
 
-  Tone.Transport.start();
+document.querySelector('textarea')?.addEventListener('keydown', (e) => {
+  // eslint-disable-next-line no-constant-condition
+  console.log('starting...');
+  console.log('Tone.context.state', Tone.context.state);
+
+  //create a synth for each track
+  // const piano = pianos[index];
+  const note = noteGenerator.next().value;
+  console.log(note);
+
+  if (note) {
+    piano.triggerAttackRelease(
+      [note.name],
+      [note.duration * 1.2, '4'],
+      Tone.now(),
+      note.velocity
+    );
+  }
 });
+
+const noteGenerator = NoteGenerator();
+function* NoteGenerator() {
+  while (notes.length) {
+    yield notes.shift();
+  }
+}
